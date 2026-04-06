@@ -20,6 +20,21 @@ so this is an attempt to structure that chaos.
 
 ---
 
+## Core Idea
+
+Instead of mixing everything into one table, the design separates things properly:
+
+* `product` : basic info
+* `product_variant` : actual sellable unit
+* `order_items` : connects orders and products
+
+this makes it flexible enough to handle both :
+
+* thrift : mostly single piece
+* handmade : multiple quantity
+
+---
+
 ## Entities
 
 * customer
@@ -47,3 +62,11 @@ so this is an attempt to structure that chaos.
 ## ER-Diagram
 
 ![screenshot-of-thrift-store-er-model](./thrift-store-er-model.png)
+
+---
+
+## Small Decisions that Matter
+
+* variants handle stock, not product
+* condition stored at variant level, important for thrift
+* `order_items` used as junction table, clean many-to-many
